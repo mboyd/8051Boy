@@ -2,6 +2,28 @@
 ;;;;;;;;;;;;;;;;;;;; SETUP ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+era equ r0
+erf equ r1
+erb equ r2
+erc equ r3
+erd equ r4
+ere equ r5
+erh equ r6
+erl equ r7
+
+epcl data 0x30
+epch data 0x31
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;; OPCODE DISPATCH ;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+mov dpl, epcl
+mov dph, epch
+movx a, @dptr
+
+; 16-bit jump table nonsense here
+; may need chained jump within table
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;; BEGIN OPCODE TABLE ;;;;;;;;;;;;;;;;;;;;;;
@@ -14,12 +36,14 @@ org op_base + 0x0
 ;  1 byte 
 ;  4 cycles 
 ;  - - - -
+ljmp done
 
 org op_base + 0x8
 ; LD BC,d16 
 ;  3 bytes 
 ;  12 cycles 
 ;  - - - -
+
 
 org op_base + 0x10
 ; LD (BC),A 
@@ -50,6 +74,10 @@ org op_base + 0x30
 ;  2 bytes 
 ;  8 cycles 
 ;  - - - -
+inc dptr
+movx a, @dptr
+mov erb, a
+ljmp done
 
 org op_base + 0x38
 ; RLCA 
@@ -98,6 +126,11 @@ org op_base + 0x70
 ;  2 bytes 
 ;  8 cycles 
 ;  - - - -
+inc dptr
+movx a, @dptr
+mov erc, a
+ljmp done
+
 
 org op_base + 0x78
 ; RRCA 
@@ -146,6 +179,11 @@ org op_base + 0xb0
 ;  2 bytes 
 ;  8 cycles 
 ;  - - - -
+inc dptr
+movx a, @dptr
+mov erd, a
+ljmp done
+
 
 org op_base + 0xb8
 ; RLA 
@@ -194,6 +232,11 @@ org op_base + 0xf0
 ;  2 bytes 
 ;  8 cycles 
 ;  - - - -
+inc dptr
+movx a, @dptr
+mov ere, a
+ljmp done
+
 
 org op_base + 0xf8
 ; RRA 
@@ -242,6 +285,11 @@ org op_base + 0x130
 ;  2 bytes 
 ;  8 cycles 
 ;  - - - -
+inc dptr
+movx a, @dptr
+mov erh, a
+ljmp done
+
 
 org op_base + 0x138
 ; DAA 
@@ -290,6 +338,11 @@ org op_base + 0x170
 ;  2 bytes 
 ;  8 cycles 
 ;  - - - -
+inc dptr
+movx a, @dptr
+mov erl, a
+ljmp done
+
 
 org op_base + 0x178
 ; CPL 
@@ -386,6 +439,11 @@ org op_base + 0x1f0
 ;  2 bytes 
 ;  8 cycles 
 ;  - - - -
+inc dptr
+movx a, @dptr
+mov era, a
+ljmp done
+
 
 org op_base + 0x1f8
 ; CCF 
@@ -440,42 +498,63 @@ org op_base + 0x238
 ;  1 byte 
 ;  4 cycles 
 ;  - - - -
+mov a, era
+mov erb, a
+ljmp done
 
 org op_base + 0x240
 ; LD C,B 
 ;  1 byte 
 ;  4 cycles 
 ;  - - - -
+mov a, erb
+mov erc, a
+ljmp done
 
 org op_base + 0x248
 ; LD C,C 
 ;  1 byte 
 ;  4 cycles 
 ;  - - - -
+mov a, erc
+mov erc, a
+ljmp done
 
 org op_base + 0x250
 ; LD C,D 
 ;  1 byte 
 ;  4 cycles 
 ;  - - - -
+mov a, erd
+mov erc, a
+ljmp done
 
 org op_base + 0x258
 ; LD C,E 
 ;  1 byte 
 ;  4 cycles 
 ;  - - - -
+mov a, ere
+mov erc, a
+ljmp done
 
 org op_base + 0x260
 ; LD C,H 
 ;  1 byte 
 ;  4 cycles 
 ;  - - - -
+mov a, erh
+mov erc, a
+ljmp done
 
 org op_base + 0x268
 ; LD C,L 
 ;  1 byte 
 ;  4 cycles 
 ;  - - - -
+mov a, erl
+mov erc, a
+ljmp done
 
 org op_base + 0x270
 ; LD C,(HL) 
@@ -488,42 +567,62 @@ org op_base + 0x278
 ;  1 byte 
 ;  4 cycles 
 ;  - - - -
+mov a, era
+mov erc, a
+ljmp done
 
 org op_base + 0x280
 ; LD D,B 
 ;  1 byte 
 ;  4 cycles 
 ;  - - - -
+mov a, erb
+mov erd, a
+ljmp done
 
 org op_base + 0x288
 ; LD D,C 
 ;  1 byte 
 ;  4 cycles 
 ;  - - - -
+mov a, erc
+mov erd, a
 
 org op_base + 0x290
 ; LD D,D 
 ;  1 byte 
 ;  4 cycles 
 ;  - - - -
+mov a, erd
+mov erd, a
+ljmp done
 
 org op_base + 0x298
 ; LD D,E 
 ;  1 byte 
 ;  4 cycles 
 ;  - - - -
+mov a, ere
+mov erd, a
+ljmp done
 
 org op_base + 0x2a0
 ; LD D,H 
 ;  1 byte 
 ;  4 cycles 
 ;  - - - -
+mov a, erh
+mov erd, a
+ljmp done
 
 org op_base + 0x2a8
 ; LD D,L 
 ;  1 byte 
 ;  4 cycles 
 ;  - - - -
+mov a, erl
+mov erd, a
+ljmp done
 
 org op_base + 0x2b0
 ; LD D,(HL) 
@@ -536,42 +635,63 @@ org op_base + 0x2b8
 ;  1 byte 
 ;  4 cycles 
 ;  - - - -
+mov a, era
+mov erd, a
+ljmp done
 
 org op_base + 0x2c0
 ; LD E,B 
 ;  1 byte 
 ;  4 cycles 
 ;  - - - -
+mov a, erb
+mov ere, a
+ljmp done
 
 org op_base + 0x2c8
 ; LD E,C 
 ;  1 byte 
 ;  4 cycles 
 ;  - - - -
+mov a, erc
+mov ere, a
+ljmp done
 
 org op_base + 0x2d0
 ; LD E,D 
 ;  1 byte 
 ;  4 cycles 
 ;  - - - -
+mov a, erd
+mov ere, a
+ljmp done
 
 org op_base + 0x2d8
 ; LD E,E 
 ;  1 byte 
 ;  4 cycles 
 ;  - - - -
+mov a, ere
+mov ere, a
+ljmp done
 
 org op_base + 0x2e0
 ; LD E,H 
 ;  1 byte 
 ;  4 cycles 
 ;  - - - -
+mov a, erh
+mov ere, a
+ljmp done
 
 org op_base + 0x2e8
 ; LD E,L 
 ;  1 byte 
 ;  4 cycles 
 ;  - - - -
+mov a, erl
+mov ere, a
+ljmp done
 
 org op_base + 0x2f0
 ; LD E,(HL) 
@@ -584,42 +704,63 @@ org op_base + 0x2f8
 ;  1 byte 
 ;  4 cycles 
 ;  - - - -
+mov a, era
+mov ere, a
+ljmp done
 
 org op_base + 0x300
 ; LD H,B 
 ;  1 byte 
 ;  4 cycles 
 ;  - - - -
+mov a, erb
+mov erh, a
+ljmp done
 
 org op_base + 0x308
 ; LD H,C 
 ;  1 byte 
 ;  4 cycles 
 ;  - - - -
+mov a, erc
+mov erh, a
+ljmp done
 
 org op_base + 0x310
 ; LD H,D 
 ;  1 byte 
 ;  4 cycles 
 ;  - - - -
+mov a, erd
+mov erh, a
+ljmp done
 
 org op_base + 0x318
 ; LD H,E 
 ;  1 byte 
 ;  4 cycles 
 ;  - - - -
+mov a, ere
+mov erh, a
+ljmp done
 
 org op_base + 0x320
 ; LD H,H 
 ;  1 byte 
 ;  4 cycles 
 ;  - - - -
+mov a, erh
+mov erh, a
+ljmp done
 
 org op_base + 0x328
 ; LD H,L 
 ;  1 byte 
 ;  4 cycles 
 ;  - - - -
+mov a, erl
+mov erh, a
+ljmp done
 
 org op_base + 0x330
 ; LD H,(HL) 
@@ -632,42 +773,63 @@ org op_base + 0x338
 ;  1 byte 
 ;  4 cycles 
 ;  - - - -
+mov a, era
+mov erh, a
+ljmp done
 
 org op_base + 0x340
 ; LD L,B 
 ;  1 byte 
 ;  4 cycles 
 ;  - - - -
+mov a, erb
+mov erl, a
+ljmp done
 
 org op_base + 0x348
 ; LD L,C 
 ;  1 byte 
 ;  4 cycles 
 ;  - - - -
+mov a, erc
+mov erl, a
+ljmp done
 
 org op_base + 0x350
 ; LD L,D 
 ;  1 byte 
 ;  4 cycles 
 ;  - - - -
+mov a, erd
+mov erl, a
+ljmp done
 
 org op_base + 0x358
 ; LD L,E 
 ;  1 byte 
 ;  4 cycles 
 ;  - - - -
+mov a, ere
+mov erl, a
+ljmp done
 
 org op_base + 0x360
 ; LD L,H 
 ;  1 byte 
 ;  4 cycles 
 ;  - - - -
+mov a, erh
+mov erl, a
+ljmp done
 
 org op_base + 0x368
 ; LD L,L 
 ;  1 byte 
 ;  4 cycles 
 ;  - - - -
+mov a, erl
+mov erl, a
+ljmp done
 
 org op_base + 0x370
 ; LD L,(HL) 
@@ -680,6 +842,9 @@ org op_base + 0x378
 ;  1 byte 
 ;  4 cycles 
 ;  - - - -
+mov a, era
+mov erl, a
+ljmp done
 
 org op_base + 0x380
 ; LD (HL),B 
@@ -734,36 +899,54 @@ org op_base + 0x3c0
 ;  1 byte 
 ;  4 cycles 
 ;  - - - -
+mov a, erb
+mov era, a
+ljmp done
 
 org op_base + 0x3c8
 ; LD A,C 
 ;  1 byte 
 ;  4 cycles 
 ;  - - - -
+mov a, erc
+mov era, a
+ljmp done
 
 org op_base + 0x3d0
 ; LD A,D 
 ;  1 byte 
 ;  4 cycles 
 ;  - - - -
+mov a, erd
+mov era, a
+ljmp done
 
 org op_base + 0x3d8
 ; LD A,E 
 ;  1 byte 
 ;  4 cycles 
 ;  - - - -
+mov a, ere
+mov era, a
+ljmp done
 
 org op_base + 0x3e0
 ; LD A,H 
 ;  1 byte 
 ;  4 cycles 
 ;  - - - -
+mov a, erh
+mov era, a
+ljmp done
 
 org op_base + 0x3e8
 ; LD A,L 
 ;  1 byte 
 ;  4 cycles 
 ;  - - - -
+mov a, erl
+mov era, a
+ljmp done
 
 org op_base + 0x3f0
 ; LD A,(HL) 
@@ -776,6 +959,9 @@ org op_base + 0x3f8
 ;  1 byte 
 ;  4 cycles 
 ;  - - - -
+mov a, era
+mov era, a
+ljmp done
 
 org op_base + 0x400
 ; ADD A,B 
@@ -1511,6 +1697,10 @@ org op_base + 0x7f8
 ;  1 byte 
 ;  16 cycles 
 ;  - - - -
+
+
+done:
+	loop: ljmp loop
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
