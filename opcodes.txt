@@ -1,0 +1,256 @@
+NOP : 1 byte : 4 cycles : - - - -
+LD BC,d16 : 3 bytes : 12 cycles : - - - -
+LD (BC),A : 1 byte : 8 cycles : - - - -
+INC BC : 1 byte : 8 cycles : - - - -
+INC B : 1 byte : 4 cycles : Z 0 H -
+DEC B : 1 byte : 4 cycles : Z 1 H -
+LD B,d8 : 2 bytes : 8 cycles : - - - -
+RLCA : 1 byte : 4 cycles : 0 0 0 C
+LD (a16),SP : 3 bytes : 20 cycles : - - - -
+ADD HL,BC : 1 byte : 8 cycles : - 0 H C
+LD A,(BC) : 1 byte : 8 cycles : - - - -
+DEC BC : 1 byte : 8 cycles : - - - -
+INC C : 1 byte : 4 cycles : Z 0 H -
+DEC C : 1 byte : 4 cycles : Z 1 H -
+LD C,d8 : 2 bytes : 8 cycles : - - - -
+RRCA : 1 byte : 4 cycles : 0 0 0 C
+STOP 0 : 2 bytes : 4 cycles : - - - -
+LD DE,d16 : 3 bytes : 12 cycles : - - - -
+LD (DE),A : 1 byte : 8 cycles : - - - -
+INC DE : 1 byte : 8 cycles : - - - -
+INC D : 1 byte : 4 cycles : Z 0 H -
+DEC D : 1 byte : 4 cycles : Z 1 H -
+LD D,d8 : 2 bytes : 8 cycles : - - - -
+RLA : 1 byte : 4 cycles : 0 0 0 C
+JR r8 : 2 bytes : 12 cycles : - - - -
+ADD HL,DE : 1 byte : 8 cycles : - 0 H C
+LD A,(DE) : 1 byte : 8 cycles : - - - -
+DEC DE : 1 byte : 8 cycles : - - - -
+INC E : 1 byte : 4 cycles : Z 0 H -
+DEC E : 1 byte : 4 cycles : Z 1 H -
+LD E,d8 : 2 bytes : 8 cycles : - - - -
+RRA : 1 byte : 4 cycles : 0 0 0 C
+JR NZ,r8 : 2 bytes : 12/8 cycles : - - - -
+LD HL,d16 : 3 bytes : 12 cycles : - - - -
+LD (HL+),A : 1 byte : 8 cycles : - - - -
+INC HL : 1 byte : 8 cycles : - - - -
+INC H : 1 byte : 4 cycles : Z 0 H -
+DEC H : 1 byte : 4 cycles : Z 1 H -
+LD H,d8 : 2 bytes : 8 cycles : - - - -
+DAA : 1 byte : 4 cycles : Z - 0 C
+JR Z,r8 : 2 bytes : 12/8 cycles : - - - -
+ADD HL,HL : 1 byte : 8 cycles : - 0 H C
+LD A,(HL+) : 1 byte : 8 cycles : - - - -
+DEC HL : 1 byte : 8 cycles : - - - -
+INC L : 1 byte : 4 cycles : Z 0 H -
+DEC L : 1 byte : 4 cycles : Z 1 H -
+LD L,d8 : 2 bytes : 8 cycles : - - - -
+CPL : 1 byte : 4 cycles : - 1 1 -
+JR NC,r8 : 2 bytes : 12/8 cycles : - - - -
+LD SP,d16 : 3 bytes : 12 cycles : - - - -
+LD (HL-),A : 1 byte : 8 cycles : - - - -
+INC SP : 1 byte : 8 cycles : - - - -
+INC (HL) : 1 byte : 12 cycles : Z 0 H -
+DEC (HL) : 1 byte : 12 cycles : Z 1 H -
+LD (HL),d8 : 2 bytes : 12 cycles : - - - -
+SCF : 1 byte : 4 cycles : - 0 0 1
+JR C,r8 : 2 bytes : 12/8 cycles : - - - -
+ADD HL,SP : 1 byte : 8 cycles : - 0 H C
+LD A,(HL-) : 1 byte : 8 cycles : - - - -
+DEC SP : 1 byte : 8 cycles : - - - -
+INC A : 1 byte : 4 cycles : Z 0 H -
+DEC A : 1 byte : 4 cycles : Z 1 H -
+LD A,d8 : 2 bytes : 8 cycles : - - - -
+CCF : 1 byte : 4 cycles : - 0 0 C
+LD B,B : 1 byte : 4 cycles : - - - -
+LD B,C : 1 byte : 4 cycles : - - - -
+LD B,D : 1 byte : 4 cycles : - - - -
+LD B,E : 1 byte : 4 cycles : - - - -
+LD B,H : 1 byte : 4 cycles : - - - -
+LD B,L : 1 byte : 4 cycles : - - - -
+LD B,(HL) : 1 byte : 8 cycles : - - - -
+LD B,A : 1 byte : 4 cycles : - - - -
+LD C,B : 1 byte : 4 cycles : - - - -
+LD C,C : 1 byte : 4 cycles : - - - -
+LD C,D : 1 byte : 4 cycles : - - - -
+LD C,E : 1 byte : 4 cycles : - - - -
+LD C,H : 1 byte : 4 cycles : - - - -
+LD C,L : 1 byte : 4 cycles : - - - -
+LD C,(HL) : 1 byte : 8 cycles : - - - -
+LD C,A : 1 byte : 4 cycles : - - - -
+LD D,B : 1 byte : 4 cycles : - - - -
+LD D,C : 1 byte : 4 cycles : - - - -
+LD D,D : 1 byte : 4 cycles : - - - -
+LD D,E : 1 byte : 4 cycles : - - - -
+LD D,H : 1 byte : 4 cycles : - - - -
+LD D,L : 1 byte : 4 cycles : - - - -
+LD D,(HL) : 1 byte : 8 cycles : - - - -
+LD D,A : 1 byte : 4 cycles : - - - -
+LD E,B : 1 byte : 4 cycles : - - - -
+LD E,C : 1 byte : 4 cycles : - - - -
+LD E,D : 1 byte : 4 cycles : - - - -
+LD E,E : 1 byte : 4 cycles : - - - -
+LD E,H : 1 byte : 4 cycles : - - - -
+LD E,L : 1 byte : 4 cycles : - - - -
+LD E,(HL) : 1 byte : 8 cycles : - - - -
+LD E,A : 1 byte : 4 cycles : - - - -
+LD H,B : 1 byte : 4 cycles : - - - -
+LD H,C : 1 byte : 4 cycles : - - - -
+LD H,D : 1 byte : 4 cycles : - - - -
+LD H,E : 1 byte : 4 cycles : - - - -
+LD H,H : 1 byte : 4 cycles : - - - -
+LD H,L : 1 byte : 4 cycles : - - - -
+LD H,(HL) : 1 byte : 8 cycles : - - - -
+LD H,A : 1 byte : 4 cycles : - - - -
+LD L,B : 1 byte : 4 cycles : - - - -
+LD L,C : 1 byte : 4 cycles : - - - -
+LD L,D : 1 byte : 4 cycles : - - - -
+LD L,E : 1 byte : 4 cycles : - - - -
+LD L,H : 1 byte : 4 cycles : - - - -
+LD L,L : 1 byte : 4 cycles : - - - -
+LD L,(HL) : 1 byte : 8 cycles : - - - -
+LD L,A : 1 byte : 4 cycles : - - - -
+LD (HL),B : 1 byte : 8 cycles : - - - -
+LD (HL),C : 1 byte : 8 cycles : - - - -
+LD (HL),D : 1 byte : 8 cycles : - - - -
+LD (HL),E : 1 byte : 8 cycles : - - - -
+LD (HL),H : 1 byte : 8 cycles : - - - -
+LD (HL),L : 1 byte : 8 cycles : - - - -
+HALT : 1 byte : 4 cycles : - - - -
+LD (HL),A : 1 byte : 8 cycles : - - - -
+LD A,B : 1 byte : 4 cycles : - - - -
+LD A,C : 1 byte : 4 cycles : - - - -
+LD A,D : 1 byte : 4 cycles : - - - -
+LD A,E : 1 byte : 4 cycles : - - - -
+LD A,H : 1 byte : 4 cycles : - - - -
+LD A,L : 1 byte : 4 cycles : - - - -
+LD A,(HL) : 1 byte : 8 cycles : - - - -
+LD A,A : 1 byte : 4 cycles : - - - -
+ADD A,B : 1 byte : 4 cycles : Z 0 H C
+ADD A,C : 1 byte : 4 cycles : Z 0 H C
+ADD A,D : 1 byte : 4 cycles : Z 0 H C
+ADD A,E : 1 byte : 4 cycles : Z 0 H C
+ADD A,H : 1 byte : 4 cycles : Z 0 H C
+ADD A,L : 1 byte : 4 cycles : Z 0 H C
+ADD A,(HL) : 1 byte : 8 cycles : Z 0 H C
+ADD A,A : 1 byte : 4 cycles : Z 0 H C
+ADC A,B : 1 byte : 4 cycles : Z 0 H C
+ADC A,C : 1 byte : 4 cycles : Z 0 H C
+ADC A,D : 1 byte : 4 cycles : Z 0 H C
+ADC A,E : 1 byte : 4 cycles : Z 0 H C
+ADC A,H : 1 byte : 4 cycles : Z 0 H C
+ADC A,L : 1 byte : 4 cycles : Z 0 H C
+ADC A,(HL) : 1 byte : 8 cycles : Z 0 H C
+ADC A,A : 1 byte : 4 cycles : Z 0 H C
+SUB B : 1 byte : 4 cycles : Z 1 H C
+SUB C : 1 byte : 4 cycles : Z 1 H C
+SUB D : 1 byte : 4 cycles : Z 1 H C
+SUB E : 1 byte : 4 cycles : Z 1 H C
+SUB H : 1 byte : 4 cycles : Z 1 H C
+SUB L : 1 byte : 4 cycles : Z 1 H C
+SUB (HL) : 1 byte : 8 cycles : Z 1 H C
+SUB A : 1 byte : 4 cycles : Z 1 H C
+SBC A,B : 1 byte : 4 cycles : Z 1 H C
+SBC A,C : 1 byte : 4 cycles : Z 1 H C
+SBC A,D : 1 byte : 4 cycles : Z 1 H C
+SBC A,E : 1 byte : 4 cycles : Z 1 H C
+SBC A,H : 1 byte : 4 cycles : Z 1 H C
+SBC A,L : 1 byte : 4 cycles : Z 1 H C
+SBC A,(HL) : 1 byte : 8 cycles : Z 1 H C
+SBC A,A : 1 byte : 4 cycles : Z 1 H C
+AND B : 1 byte : 4 cycles : Z 0 1 0
+AND C : 1 byte : 4 cycles : Z 0 1 0
+AND D : 1 byte : 4 cycles : Z 0 1 0
+AND E : 1 byte : 4 cycles : Z 0 1 0
+AND H : 1 byte : 4 cycles : Z 0 1 0
+AND L : 1 byte : 4 cycles : Z 0 1 0
+AND (HL) : 1 byte : 8 cycles : Z 0 1 0
+AND A : 1 byte : 4 cycles : Z 0 1 0
+XOR B : 1 byte : 4 cycles : Z 0 0 0
+XOR C : 1 byte : 4 cycles : Z 0 0 0
+XOR D : 1 byte : 4 cycles : Z 0 0 0
+XOR E : 1 byte : 4 cycles : Z 0 0 0
+XOR H : 1 byte : 4 cycles : Z 0 0 0
+XOR L : 1 byte : 4 cycles : Z 0 0 0
+XOR (HL) : 1 byte : 8 cycles : Z 0 0 0
+XOR A : 1 byte : 4 cycles : Z 0 0 0
+OR B : 1 byte : 4 cycles : Z 0 0 0
+OR C : 1 byte : 4 cycles : Z 0 0 0
+OR D : 1 byte : 4 cycles : Z 0 0 0
+OR E : 1 byte : 4 cycles : Z 0 0 0
+OR H : 1 byte : 4 cycles : Z 0 0 0
+OR L : 1 byte : 4 cycles : Z 0 0 0
+OR (HL) : 1 byte : 8 cycles : Z 0 0 0
+OR A : 1 byte : 4 cycles : Z 0 0 0
+CP B : 1 byte : 4 cycles : Z 1 H C
+CP C : 1 byte : 4 cycles : Z 1 H C
+CP D : 1 byte : 4 cycles : Z 1 H C
+CP E : 1 byte : 4 cycles : Z 1 H C
+CP H : 1 byte : 4 cycles : Z 1 H C
+CP L : 1 byte : 4 cycles : Z 1 H C
+CP (HL) : 1 byte : 8 cycles : Z 1 H C
+CP A : 1 byte : 4 cycles : Z 1 H C
+RET NZ : 1 byte : 20/8 cycles : - - - -
+POP BC : 1 byte : 12 cycles : - - - -
+JP NZ,a16 : 3 bytes : 16/12 cycles : - - - -
+JP a16 : 3 bytes : 16 cycles : - - - -
+CALL NZ,a16 : 3 bytes : 24/12 cycles : - - - -
+PUSH BC : 1 byte : 16 cycles : - - - -
+ADD A,d8 : 2 bytes : 8 cycles : Z 0 H C
+RST 00H : 1 byte : 16 cycles : - - - -
+RET Z : 1 byte : 20/8 cycles : - - - -
+RET : 1 byte : 16 cycles : - - - -
+JP Z,a16 : 3 bytes : 16/12 cycles : - - - -
+PREFIX CB : 1 byte : 4 cycles : - - - -
+CALL Z,a16 : 3 bytes : 24/12 cycles : - - - -
+CALL a16 : 3 bytes : 24 cycles : - - - -
+ADC A,d8 : 2 bytes : 8 cycles : Z 0 H C
+RST 08H : 1 byte : 16 cycles : - - - -
+RET NC : 1 byte : 20/8 cycles : - - - -
+POP DE : 1 byte : 12 cycles : - - - -
+JP NC,a16 : 3 bytes : 16/12 cycles : - - - -
+
+CALL NC,a16 : 3 bytes : 24/12 cycles : - - - -
+PUSH DE : 1 byte : 16 cycles : - - - -
+SUB d8 : 2 bytes : 8 cycles : Z 1 H C
+RST 10H : 1 byte : 16 cycles : - - - -
+RET C : 1 byte : 20/8 cycles : - - - -
+RETI : 1 byte : 16 cycles : - - - -
+JP C,a16 : 3 bytes : 16/12 cycles : - - - -
+
+CALL C,a16 : 3 bytes : 24/12 cycles : - - - -
+
+SBC A,d8 : 2 bytes : 8 cycles : Z 1 H C
+RST 18H : 1 byte : 16 cycles : - - - -
+LDH (a8),A : 2 bytes : 12 cycles : - - - -
+POP HL : 1 byte : 12 cycles : - - - -
+LD (C),A : 2 bytes : 8 cycles : - - - -
+
+
+PUSH HL : 1 byte : 16 cycles : - - - -
+AND d8 : 2 bytes : 8 cycles : Z 0 1 0
+RST 20H : 1 byte : 16 cycles : - - - -
+ADD SP,r8 : 2 bytes : 16 cycles : 0 0 H C
+JP (HL) : 1 byte : 4 cycles : - - - -
+LD (a16),A : 3 bytes : 16 cycles : - - - -
+
+
+
+XOR d8 : 2 bytes : 8 cycles : Z 0 0 0
+RST 28H : 1 byte : 16 cycles : - - - -
+LDH A,(a8) : 2 bytes : 12 cycles : - - - -
+POP AF : 1 byte : 12 cycles : Z N H C
+LD A,(C) : 2 bytes : 8 cycles : - - - -
+DI : 1 byte : 4 cycles : - - - -
+
+PUSH AF : 1 byte : 16 cycles : - - - -
+OR d8 : 2 bytes : 8 cycles : Z 0 0 0
+RST 30H : 1 byte : 16 cycles : - - - -
+LD HL,SP+r8 : 2 bytes : 12 cycles : 0 0 H C
+LD SP,HL : 1 byte : 8 cycles : - - - -
+LD A,(a16) : 3 bytes : 16 cycles : - - - -
+EI : 1 byte : 4 cycles : - - - -
+
+
+CP d8 : 2 bytes : 8 cycles : Z 1 H C
+RST 38H : 1 byte : 16 cycles : - - - -
