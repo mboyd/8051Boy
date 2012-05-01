@@ -88,17 +88,33 @@ def ld8(r):
     print "mov er" + r + ", a"
     print "ljmp done"
 
+# Bit opcodes
+
 @match(r'BIT (\d),(\w)')
 def bit(bit, r):
     bit = int(bit)
     r = r.lower()
     
-    print "mov 0x21, er" + r
-    print "mov erf, #0x20"
-    print "mov 0, " + str(8 + 7 - bit)
+    print "mov a, er" + r
+    print "anl a, #" + hex(2**bit)
+    print "mov erzf, a"
+    print "clr ernf"
+    print "setb erhf"
     print "ljmp done"
 
+@match(r'BIT (\d),\(HL\)')
+def bithl(bit):
+    bit = int(bit)
     
+    print "mov dpl, erl"
+    print "mov dph, erh"
+    print "movx a, @dptr"
+    print "anl a, #" + hex(2**bit)
+    print "mov erzf, a"
+    print "clr ernf"
+    print "setb erhf"
+    print "ljmp done"
+
 @match(r'SET (\d),(\w)')
 def set(bit, r):
     bit = int(bit)
