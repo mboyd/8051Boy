@@ -9,7 +9,7 @@ for line in f_in:
     if line == "\n":
         print 'org op_base + ' + hex(addr)
         print '; (unused)\n'
-        addr += 8
+        addr += 16
         continue
     try:
         opcode, bytes, cycles, flags = line.split(':')
@@ -17,10 +17,10 @@ for line in f_in:
         print >> sys.stderr, 'Bad line: ' + line
         continue
     
-    print 'org op_base + ' + hex(addr)
+    print 'org cb_base + ' + hex(addr)
     print '; ' + opcode
     print '; ' + bytes
     print '; ' + cycles
     print '; ' + flags
     
-    addr += 8
+    addr += 16
